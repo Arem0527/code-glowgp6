@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hair Products | Code & Glow</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: serif;
+      background-color: #f8f4e8;
+
+
+      
+      height: auto;
+      overflow: auto;
+    }
+
+    header {
+      background-color: #f8f4e8;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding-top: 30px;
+    }
+
+    .sign-in {
+      position: absolute;
+      top: 5px;
+      right: 120px;
+      display: flex;
+      align-items: center;
+      color: #7a4212;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .sign-in img {
+      width: 16px;
+      height: 16px;
+      margin-right: 5px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 24px 15px;
+    }
+
+    .logo a {
+      text-decoration: none;
+      color: #7a4212;
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .search-bar {
+      flex: 1;
+      margin: 0 25px;
+      margin-right: 40px;
+    }
+
+    .search-bar input {
+      padding: 8px 16px;
+      border-radius: 9999px;
+      border: 1px solid #ddd;
+      width: 100%;
+      background-color: #fff;
+    }
+
+    .user-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .wishlist img,
+    .cart img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .main-nav {
+      display: flex;
+      padding: 10px 0;
+      background-color: #f8f4e8;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .main-nav a {
+      text-decoration: none;
+      color: #7a4212;
+      font-size: 14px;
+      padding: 0 15px;
+    }
+
+    .main-nav a:first-child {
+      padding-left: 24px;
+    }
+
+    .main-nav a:not(:last-child) {
+      border-right: 1px solid #e0d8c0;
+    }
+
+    .toggle-sidebar-btn {
+      margin: 15px;
+      background-color: #7a4212;
+      color: white;
+      padding: 10px 20px;
+      border: 1px solid #7a4212;
+      border-radius: 20px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .shop-layout {
+      display: flex;
+      flex-wrap: wrap;
+      min-height: 100vh;
+    }
+
+    .shop-sidebar {
+      display: none;
+      width: 220px;
+      background-color: #b99d7f;
+      padding: 30px 20px;
+      box-shadow: 3px 0 8px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+    }
+
+    .shop-sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .shop-sidebar li {
+      margin-bottom: 15px;
+    }
+
+    .shop-sidebar a {
+      text-decoration: none;
+      color: #4d2e17;
+      font-size: 16px;
+      display: block;
+      transition: 0.2s;
+    }
+
+    .shop-sidebar a:hover {
+      color: #fff;
+      background-color: #7a4212;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .product-area {
+  flex: 1;
+  padding: 30px;
+  padding-bottom: 80px;
+  background-color: #f8f4e8;
+}
+
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .product-card {
+      background-color: #f3ecdf;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      height: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: contain;
+      margin-bottom: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .product-name {
+      font-weight: normal;
+      margin: 8px 0 4px;
+    }
+
+    .product-price {
+      font-weight: bold;
+      color: #4d2e17;
+    }
+
+    @media (max-width: 1024px) {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a href="profile.html" class="sign-in">
+      <img src="https://icons.veryicon.com/png/o/education-technology/education-cloud/username-1.png" alt="User Icon" />
+      <span>Username</span>
+    </a>
+
+    <div class="top-bar">
+      <h1 class="logo"><a href="index.html">CODE & GLOW</a></h1>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search..." />
+      </div>
+
+      <div class="user-actions">
+        <a href="#" class="wishlist">
+          <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="Wishlist" />
+        </a>
+        <a href="#" class="cart">
+          <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Cart" />
+        </a>
+      </div>
+    </div>
+
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="flashsales.html">Offers</a>
+      <a href="objective_purpose.html">About Us</a>
+    </nav>
+  </header>
+
+  <a href="#" class="toggle-sidebar-btn">Categories</a>
+
+  <div class="shop-layout">
+    <aside class="shop-sidebar" id="shopSidebar">
+      <ul>
+        <li><a href="hair.html">Hair Products</a></li>
+        <li><a href="nail.html">Nail Products</a></li>
+        <li><a href="face.html">Face Products</a></li>
+        <li><a href="cosmeticproducts.html">Cosmetics</a></li>
+        <li><a href="services.html">Services</a></li>
+      </ul>
+    </aside>
+
+    <main class="product-area" id="productArea">
+      <div class="product-grid" id="productGrid">
+        <div class="product-card">
+          <img src="https://www.milbon.com.my/wp-content/uploads/2023/11/emulsion-serum.jpg">
+          <p class="product-name">Milbon Elujuda Emulsion Plus</p>
+          <p class="product-price">Php 250</p>
+        </div>
+        <div class="product-card">
+          <img src="https://i.etsystatic.com/18442207/r/il/9cfd33/3673984929/il_fullxfull.3673984929_6xcv.jpg?fbclid=IwY2xjawKXZh5leHRuA2FlbQIxMABicmlkETFMU2hTNDE3ZE93Y0RIWWthAR7KPZonl2al0p9yT_3YmJgTcK9P-hXH2CjORrnNUPAvN1vuZpaiic08sFAFug_aem_FdnjiE3NysCePjtYrIiidQ">
+          <p class="product-name">NAILTIME4YOU Press-On Nails</p>
+          <p class="product-price">Php 168</p>
+        </div>
+        <div class="product-card">
+          <img src="https://image-optimizer-reg.production.sephora-asia.net/images/product_images/closeup_1_Product_840122905056-RARE-BEAUTY-Kind-Words-Matte-Lipstick-Worthy_fef0d1d0a13338973cb00176d5f88a1119c52c2f_1655140249.png">
+          <p class="product-name">Rare Beauty Kind Words Matte Lipstick • 3.5g </p>
+          <p class="product-price">Php 189</p>
+        </div>
+        <div class="product-card">
+          <img src="https://image-optimizer-reg.production.sephora-asia.net/images/product_images/closeup_1_Product_840026668026-Fenty-Beauty-Gloss-Bomb-Stix-BlazD-Do_ba0ed74d56818ec223e05ba2e95f9f160e760724_1720439567.png">
+          <p class="product-name">Gloss Bomb Stix • 42.1g</p>
+          <p class="product-price">Php 250</p>
+        </div>
+        <div class="product-card">
+          <img src="https://image-optimizer-reg.production.sephora-asia.net/images/product_images/closeup_1_Product_3522930004325-Caudalie-Vinoperfect-Brightening-Dar_b26331e5f92c83a2ef836419657f640a9434c304_1712750254.png?o=clean-planet-aware">
+          <p class="product-name">Vinoperfect Brightening Dark Spot Serum</p>
+          <p class="product-price">Php 350</p>
+        </div>
+        <div class="product-card">
+          <img src="https://image-optimizer-reg.production.sephora-asia.net/images/product_images/closeup_1_Product_840026684125-Fenty-Skin-Cherry-Dub-BHA-Toner-150ml_12286a406ab55a0b8671ee573b1ce1628a4f9e16_1740570496.png?o=clean">
+          <p class="product-name">Cherry Dub BHA Toner</p>
+          <p class="product-price">Php 255</p>
+        </div>
+        <div class="product-card">
+          <img src="https://salonvivah.com/wp-content/uploads/2021/10/Hair-Color.jpg?fbclid=IwY2xjawKXc1VleHRuA2FlbQIxMABicmlkETFMU2hTNDE3ZE93Y0RIWWthAR4hyVpZ1sMe35Lf0CJJ1wLOs_NLi1eBdSw8CPy7WBl1jJqk5uvgSF-vz_EAmQ_aem_S7u7kBZbxp5LaCaTv2FfEQ">
+          <p class="product-name">Hair Coloring </p>
+          <p class="product-price">Php 600.00 – 1,200.00</p>
+        </div>
+        <div class="product-card">
+          <img src="https://avalon.edu/wp-content/uploads/2018/03/shutterstock_1043769631.jpg?fbclid=IwY2xjawKXc4tleHRuA2FlbQIxMABicmlkETFMU2hTNDE3ZE93Y0RIWWthAR6ML4Xt4mK8mKJgG2qOQyHNu_JkXRq_qgLNFbLMbSCv4XBP4bopV2fHD55vKQ_aem_Vf20cmcEj69pGhRA833mk">
+          <p class="product-name">Eyelash Extension</p>
+          <p class="product-price">Php 300.00 – 800.00</p>
+        </div>
+        <div class="product-card">
+          <img src="https://image-optimizer-reg.production.sephora-asia.net/images/product_images/zoom_1_Product_9355909002138-Ultra-Violette-Daydream-Screen-SPF50-Tinted-Veil-50ml_f3b31fc89ac75af35a3b066ac2fd9d2eca037772_1688098395.png">
+          <p class="product-name">Daydream Screen SPF50 Tinted Veil</p>
+          <p class="product-price">Php 250</p>
+        </div>
+        <div class="product-card">
+          <img src="https://www.lorealparis.com.ph/-/media/project/loreal/brand-sites/oap/apac/ph/products/hair/hair-color/excellence/ash-supreme/7-73-champagne-ash-packshot.png">
+          <p class="product-name">L’Oréal Paris Excellence Ash Supreme Hair Color - 7.73 Champagne Ash with Anti Brass Purple Shampoo</p>
+          <p class="product-price">Php 399</p>
+        </div>
+        <div class="product-card">
+          <img src="https://bestibeautyjp.com/cdn/shop/files/PinkBrushStrokesBeautySalonLogo-2025-01-14T004621.025.png?v=1736844394">
+          <p class="product-name">Rhode Pineapple Cleanser</p>
+          <p class="product-price">Php 450</p>
+        </div>
+        <div class="product-card">
+          <img src="https://simplybeauty.ph/cdn/shop/products/lakme_color_stay_conditioner_300ml_grande.jpg?v=1593288085">
+          <p class="product-name">Lakme Teknia Color Stay Treatment</p>
+          <p class="product-price">Php 350</p>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+
+  <script>
+    document.getElementById("searchInput").addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        const query = this.value.trim().toLowerCase();
+        if (query.includes("hair")) {
+          window.location.href = "hairproducts.html";
+        } else if (query.includes("cos") || query.includes("cosmetic")) {
+          window.location.href = "cosmetics.html";
+        } else if (query.includes("nail")) {
+          window.location.href = "nailproducts.html";
+        } else if (query.includes("face") || query.includes("skin")) {
+          window.location.href = "faceproducts.html";
+        } else if (query.includes("service")) {
+          window.location.href = "servicesto.html";
+        } else {
+          alert("No results found.");
+        }
+      }
+    });
+
+    const sidebar = document.getElementById("shopSidebar");
+    const toggleBtn = document.querySelector(".toggle-sidebar-btn");
+
+    toggleBtn.addEventListener("click", function () {
+      sidebar.style.display = sidebar.style.display === "block" ? "none" : "block";
+    });
+  </script>
+
+  <!-- FOOTER -->
+<section style="background-color: #f0ece6; padding: 40px 20px; border-top: 1px solid #ddd;">
+  <div
+    style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 20px; max-width: 1100px; margin: auto;">
+    <div style="flex: 1 1 300px; text-align: left;">
+      <h3 style="margin-bottom: 10px; color: #000;">CUSTOMERS SERVICE:</h3>
+      <p><strong>EMAIL:</strong> <a href="mailto:CUSTOMERSERVICE@CODEANDGLOWSALON.COM" style="color: #000; text-decoration: none;">CUSTOMERSERVICE@CODEANDGLOWSALON.COM</a></p>
+      <p><strong>PHONE:</strong> <a href="tel:1-800-123-4567" style="color: #000; text-decoration: none;">1-800-123-4567</a></p>
+      <p><strong>Operating Hours:</strong><br>Monday-Friday: 9 AM - 8 PM EST<br>Saturday: 10 AM - 5 PM EST</p>
+    </div>
+    <div style="flex: 1 1 200px;">
+      <ul style="list-style: none; padding: 0;">
+        <li><a href="shipping.html" style="text-decoration: none; color: #000;">FAQs</a></li>
+        <li><a href="privacy.html" style="text-decoration: none; color: #000;">Privacy Policy</a></li>
+        <li><a href="terms.html" style="text-decoration: none; color: #000;">Terms</a></li>
+      </ul>
+    </div>
+    <div style="flex: 1 1 200px; text-align: right;">
+      <p>Connect With Us</p>
+      <a href="https://facebook.com" target="_blank" style="margin-right: 10px;">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" style="width: 30px;">
+      </a>
+      <a href="https://instagram.com" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram" style="width: 30px;">
+      </a>
+      <div style="margin-top: 20px;">
+        <img src="https://i.pinimg.com/736x/b8/f7/a1/b8f7a136ed384bbbddb50986e194f940.jpg"
+          alt="Code & Glow Logo" style="width: 100px;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="cart.js"></script>
+<script>
+  const user = localStorage.getItem("currentUser");
+  if (user) {
+    const signInLink = document.querySelector('.sign-in');
+    if (signInLink) {
+      signInLink.innerHTML = `
+        <img src="https://icons.veryicon.com/png/o/education-technology/education-cloud/username-1.png" alt="User Icon" />
+        <span>${user}</span>
+      `;
+      signInLink.href = "#"; 
+    }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Address | Code & Glow</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: serif;
+            background-color: #f8f4e8;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #f8f4e8;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding-top: 30px;
+        }
+
+        .sign-in {
+            position: absolute;
+            top: 5px;
+            right: 120px;
+            display: flex;
+            align-items: center;
+            color: #7a4212;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .sign-in img {
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px 15px;
+        }
+
+        .logo {
+            margin: 0;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: #7a4212;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .search-bar {
+            flex: 1;
+            margin: 0 25px;
+            margin-right: 40px;
+        }
+
+        .search-bar input {
+            padding: 8px 16px;
+            border-radius: 9999px;
+            border: 1px solid #ddd;
+            width: 100%;
+            background-color: #fff;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .wishlist img,
+        .cart img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .main-nav {
+            display: flex;
+            padding: 10px 0;
+            background-color: #f8f4e8;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #7a4212;
+            font-size: 14px;
+            padding: 0 15px;
+        }
+
+        .main-nav a:first-child {
+            padding-left: 24px;
+        }
+
+        .main-nav a:not(:last-child) {
+            border-right: 1px solid #e0d8c0;
+        }
+
+        .profile-container {
+            display: flex;
+            padding: 40px;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .user-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        .username {
+            font-size: 18px;
+            color: #4d2e17;
+            margin-bottom: 5px;
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links li {
+            margin-bottom: 10px;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 10px;
+            color: #7a4212;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .nav-links a.active,
+        .nav-links a:hover {
+            background-color: #f3ecdf;
+        }
+
+        .main-content {
+            flex: 1;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .add-address-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #7a4212;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .empty-address {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .empty-address img {
+            width: 100px;
+            margin-bottom: 20px;
+        }
+
+        .address-form {
+            display: none;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #7a4212;
+            border-radius: 5px;
+            background-color: #fff;
+            color: #7a4212;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #7a4212;
+        }
+
+        .label-options {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .label-btn {
+            padding: 5px 15px;
+            border: 1px solid #7a4212;
+            border-radius: 15px;
+            background: none;
+            color: #7a4212;
+            cursor: pointer;
+        }
+
+        .label-btn.active {
+            background-color: #7a4212;
+            color: white;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .form-actions button {
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            background-color: #7a4212;
+            color: white;
+            border: none;
+        }
+
+        .cancel-btn {
+            background: none;
+            border: 1px solid #7a4212;
+            color: #7a4212;
+        }
+
+        .default-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .region-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .region-selector button {
+            padding: 5px 10px;
+            background: none;
+            border: 1px solid #7a4212;
+            color: #7a4212;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .region-selector button.active {
+            background-color: #7a4212;
+            color: white;
+        }
+
+        .address-list {
+            display: grid;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .address-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 5px;
+            position: relative;
+        }
+
+        .address-card .default-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #7a4212;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="profile.html" class="sign-in">
+            <img src="https://icons.veryicon.com/png/o/education-technology/education-cloud/username-1.png" alt="User Icon" />
+            <span>Username</span>
+        </a>
+
+        <div class="top-bar">
+            <h1 class="logo"><a href="index.html">CODE & GLOW</a></h1>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search..." />
+            </div>
+            <div class="user-actions">
+                <a href="#" class="wishlist">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="Wishlist" />
+                </a>
+                <a href="#" class="cart">
+                    <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Cart" />
+                </a>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="flashsales.html">Offers</a>
+            <a href="objective_purpose.html">About Us</a>
+        </nav>
+    </header>
+
+    <div class="profile-container">
+        <aside class="sidebar">
+            <div class="user-info">
+                <img src="https://icons.veryicon.com/png/o/education-technology/education-cloud/username-1.png" alt="User Avatar" class="user-avatar" id="currentAvatar">
+                <h2 class="username" id="sidebarUsername">username</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="profile.html">Personal Details</a></li>
+                <li><a href="address.html" class="active">Address</a></li>
+                <li><a href="orders.html">Orders</a></li>
+                <li><a href="#" id="logoutBtn">Logout</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <button class="add-address-btn" onclick="showAddressForm()">
+                + Add New Address
+            </button>
+
+            <div id="emptyAddress" class="empty-address">
+                <img src="https://icon-library.com/images/location-icon-map/location-icon-map-21.jpg" alt="Location Icon">
+                <p>You don't have addresses yet.</p>
+            </div>
+
+            <div id="addressForm" class="address-form">
+                <h2>New Address</h2>
+                <form id="newAddressForm" onsubmit="saveAddress(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName">Full Name</label>
+                            <input type="text" id="fullName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number</label>
+                            <input type="tel" id="phoneNumber" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Region</label>
+                        <select id="region" onchange="updateProvinces()" required>
+                            <option value="">Select Region</option>
+                            <option value="Metro Manila">Metro Manila</option>
+                            <option value="Mindanao">Mindanao</option>
+                            <option value="North Luzon">North Luzon</option>
+                            <option value="South Luzon">South Luzon</option>
+                            <option value="Visayas">Visayas</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="province">Province</label>
+                        <select id="province" onchange="updateCities()" required>
+                            <option value="">Select Province</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <select id="city" onchange="updateBarangays()" required>
+                            <option value="">Select City</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="barangay">Barangay</label>
+                        <select id="barangay" required>
+                            <option value="">Select Barangay</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="postalCode">Postal Code</label>
+                        <input type="text" id="postalCode" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="streetAddress">Street Name, Building, House No.</label>
+                        <input type="text" id="streetAddress" required>
+                    </div>
+
+                    <div class="label-options">
+                        <label>Label As:</label>
+                        <button type="button" class="label-btn active" onclick="setAddressLabel('Home')">Home</button>
+                        <button type="button" class="label-btn" onclick="setAddressLabel('Work')">Work</button>
+                    </div>
+
+                    <div class="default-checkbox">
+                        <input type="checkbox" id="defaultAddress">
+                        <label for="defaultAddress">Set as Default Address</label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="cancel-btn" onclick="hideAddressForm()">Cancel</button>
+                        <button type="submit" class="submit-btn">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="addressList" class="address-list">
+                <!-- Address cards will be added here dynamically -->
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Load user data and initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = localStorage.getItem('currentUser');
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Update username displays
+            document.getElementById('sidebarUsername').textContent = user;
+
+            // Load saved addresses
+            loadAddresses();
+
+            // Add logout functionality
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                const user = localStorage.getItem('currentUser');
+                // Clear user-specific data
+                localStorage.removeItem('addresses_' + user);
+                localStorage.removeItem('orders_' + user);
+                localStorage.removeItem('currentUser');
+                // Redirect to login page
+                window.location.href = 'login.html';
+            });
+        });
+
+        function showAddressForm() {
+            document.getElementById('emptyAddress').style.display = 'none';
+            document.getElementById('addressForm').style.display = 'block';
+            document.getElementById('addressList').style.display = 'none';
+        }
+
+        function hideAddressForm() {
+            document.getElementById('addressForm').style.display = 'none';
+            loadAddresses();
+        }
+
+        function setAddressLabel(label) {
+            const buttons = document.querySelectorAll('.label-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function saveAddress(event) {
+            event.preventDefault();
+            const user = localStorage.getItem('currentUser');
+            if (!user) return;
+
+            const address = {
+                fullName: document.getElementById('fullName').value,
+                phoneNumber: document.getElementById('phoneNumber').value,
+                region: document.getElementById('region').value,
+                province: document.getElementById('province').value,
+                city: document.getElementById('city').value,
+                barangay: document.getElementById('barangay').value,
+                postalCode: document.getElementById('postalCode').value,
+                streetAddress: document.getElementById('streetAddress').value,
+                label: document.querySelector('.label-btn.active').textContent,
+                isDefault: document.getElementById('defaultAddress').checked
+            };
+
+            let addresses = JSON.parse(localStorage.getItem('addresses_' + user) || '[]');
+            
+            if (address.isDefault) {
+                addresses = addresses.map(addr => ({...addr, isDefault: false}));
+            }
+            
+            addresses.push(address);
+            localStorage.setItem('addresses_' + user, JSON.stringify(addresses));
+
+            document.getElementById('newAddressForm').reset();
+            hideAddressForm();
+            loadAddresses();
+        }
+
+        function loadAddresses() {
+            const user = localStorage.getItem('currentUser');
+            const addresses = JSON.parse(localStorage.getItem('addresses_' + user) || '[]');
+            const addressList = document.getElementById('addressList');
+            const emptyAddress = document.getElementById('emptyAddress');
+
+            if (addresses.length === 0) {
+                emptyAddress.style.display = 'block';
+                addressList.style.display = 'none';
+                return;
+            }
+
+            emptyAddress.style.display = 'none';
+            addressList.style.display = 'grid';
+            addressList.innerHTML = addresses.map(address => `
+                <div class="address-card">
+                    ${address.isDefault ? '<span class="default-badge">Default</span>' : ''}
+                    <h3>${address.label}</h3>
+                    <p>${address.fullName}</p>
+                    <p>${address.phoneNumber}</p>
+                    <p>${address.streetAddress}</p>
+                    <p>${address.barangay}, ${address.city}</p>
+                    <p>${address.province}, ${address.region} ${address.postalCode}</p>
+                </div>
+            `).join('');
+        }
+
+        // Philippines location data (simplified for example)
+        const locationData = {
+            'Metro Manila': {
+                provinces: ['Manila', 'Quezon City', 'Makati'],
+                cities: {
+                    'Manila': ['Tondo', 'Binondo', 'Malate'],
+                    'Quezon City': ['Diliman', 'Cubao', 'Katipunan'],
+                    'Makati': ['Poblacion', 'Bel-Air', 'San Lorenzo']
+                }
+            },
+            // Add more regions and their data
+        };
+
+        function updateProvinces() {
+            const region = document.getElementById('region').value;
+            const provinceSelect = document.getElementById('province');
+            provinceSelect.innerHTML = '<option value="">Select Province</option>';
+            
+            if (region && locationData[region]) {
+                locationData[region].provinces.forEach(province => {
+                    provinceSelect.innerHTML += `<option value="${province}">${province}</option>`;
+                });
+            }
+        }
+
+        function updateCities() {
+            const region = document.getElementById('region').value;
+            const province = document.getElementById('province').value;
+            const citySelect = document.getElementById('city');
+            citySelect.innerHTML = '<option value="">Select City</option>';
+            
+            if (region && province && locationData[region].cities[province]) {
+                locationData[region].cities[province].forEach(city => {
+                    citySelect.innerHTML += `<option value="${city}">${city}</option>`;
+                });
+            }
+        }
+
+        function updateBarangays() {
+            // Similar implementation for barangays
+            // Add your barangay data and logic here
+        }
+    </script>
+</body>
+</html> 

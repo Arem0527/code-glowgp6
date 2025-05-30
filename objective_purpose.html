@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Objective & Purpose | Code & Glow</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: serif;
+      background-color: #f8f4e8;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #f8f4e8;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding-top: 30px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 24px 15px;
+    }
+
+    .logo a {
+      text-decoration: none;
+      color: #7a4212;
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .search-bar {
+      flex: 1;
+      margin: 0 25px;
+      margin-right: 40px;
+    }
+
+    .search-bar input {
+      padding: 8px 16px;
+      border-radius: 9999px;
+      border: 1px solid #ddd;
+      width: 100%;
+      background-color: #fff;
+    }
+
+    .user-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .wishlist img,
+    .cart img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .main-nav {
+      display: flex;
+      padding: 10px 0;
+      background-color: #f8f4e8;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .main-nav a {
+      text-decoration: none;
+      color: #7a4212;
+      font-size: 14px;
+      padding: 0 15px;
+    }
+
+    .main-nav a:first-child {
+      padding-left: 24px;
+    }
+
+    .main-nav a:not(:last-child) {
+      border-right: 1px solid #e0d8c0;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .product-area {
+      padding: 30px;
+      background-color: #f8f4e8;
+    }
+
+    footer {
+      background-color: #f0ece6;
+      padding: 40px 20px;
+      border-top: 1px solid #ddd;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .footer-container ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-container a {
+      text-decoration: none;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="top-bar">
+      <h1 class="logo"><a href="index.html">CODE & GLOW</a></h1>
+
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search..." />
+      </div>
+
+      <div class="user-actions">
+        <a href="#" class="wishlist">
+          <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="Wishlist" />
+        </a>
+        <a href="#" class="cart">
+          <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Cart" />
+        </a>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById("searchInput").addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          const query = this.value.trim().toLowerCase();
+          if (query.includes("hair")) {
+            window.location.href = "hairproducts.html";
+          } else if (query.includes("cosmetic")) {
+            window.location.href = "cosmetics.html";
+          } else {
+            alert("No results found.");
+          }
+        }
+      });
+    </script>
+
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="flashsales.html">Offers</a>
+      <a href="objective_purpose.html">About Us</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="product-area">
+      <div style="max-width: 800px; margin: auto; text-align: center;">
+        <h2><strong>Objective and Purpose</strong></h2>
+        <p>
+          At Code & Glow, our mission is to provide high-quality, affordable beauty products that help you
+          feel confident and beautiful every day. We curate the best skincare, haircare, makeup, and nail essentials to make self-care easy and accessible for you.
+        </p>
+        <h3><strong>Contact</strong></h3>
+        <p><img src="https://cdn-icons-png.flaticon.com/512/597/597177.png" width="20" /> 09100560008</p>
+        <p><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" width="20" /> customerservice@codeandglowsalon.com</p>
+        <h3><strong>Connect With Us</strong></h3>
+        <div style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
+          <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="40" /></a>
+          <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram" width="40" /></a>
+        </div>
+        <h3><strong>Visit Us</strong></h3>
+        <p><img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" width="20" /> Quezon City, Philippines</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div style="flex: 1 1 300px;">
+        <h3 style="margin-bottom: 10px;">CUSTOMERS SERVICE:</h3>
+        <p><strong>EMAIL:</strong> <a href="mailto:CUSTOMERSERVICE@CODEANDGLOWSALON.COM">CUSTOMERSERVICE@CODEANDGLOWSALON.COM</a></p>
+        <p><strong>PHONE:</strong> <a href="tel:1-800-123-4567">1-800-123-4567</a></p>
+        <p><strong>Operating Hours:</strong><br>Monday-Friday: 9 AM - 8 PM EST<br>Saturday: 10 AM - 5 PM EST</p>
+      </div>
+      <div style="flex: 1 1 200px;">
+        <ul>
+          <li><a href="shipping.html">FAQs</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms</a></li>
+        </ul>
+      </div>
+      <div style="flex: 1 1 200px; text-align: right;">
+        <p>Connect With Us</p>
+        <a href="https://facebook.com" target="_blank" style="margin-right: 10px;">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" style="width: 30px;">
+        </a>
+        <a href="https://instagram.com" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram" style="width: 30px;">
+        </a>
+        <div style="margin-top: 20px;">
+          <img src="https://i.pinimg.com/736x/b8/f7/a1/b8f7a136ed384bbbddb50986e194f940.jpg" alt="Code & Glow Logo" style="width: 100px;">
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script>
+  const user = localStorage.getItem("currentUser");
+  if (user) {
+    const signInLink = document.querySelector('.sign-in');
+    if (signInLink) {
+      signInLink.innerHTML = `
+        <img src="https://icons.veryicon.com/png/o/education-technology/education-cloud/username-1.png" alt="User Icon" />
+        <span>${user}</span>
+      `;
+      signInLink.href = "profile.html"; // Optional: disable link or link to profile
+    }
+  }
+</script>
+</body>
+</html>

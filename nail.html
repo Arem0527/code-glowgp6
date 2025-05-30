@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nail Products | Code & Glow</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: serif;
+      background-color: #f8f4e8;
+    }
+
+    header {
+      background-color: #f8f4e8;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding-top: 30px;
+    }
+
+    .sign-in {
+      position: absolute;
+      top: 5px;
+      right: 120px;
+      display: flex;
+      align-items: center;
+      color: #7a4212;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .sign-in img {
+      width: 16px;
+      height: 16px;
+      margin-right: 5px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 24px 15px;
+    }
+
+    .logo a {
+      text-decoration: none;
+      color: #7a4212;
+      font-size: 24px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .search-bar {
+      flex: 1;
+      margin: 0 25px;
+      margin-right: 40px;
+    }
+
+    .search-bar input {
+      padding: 8px 16px;
+      border-radius: 9999px;
+      border: 1px solid #ddd;
+      width: 100%;
+      background-color: #fff;
+    }
+
+    .user-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .wishlist img,
+    .cart img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .main-nav {
+      display: flex;
+      padding: 10px 0;
+      background-color: #f8f4e8;
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .main-nav a {
+      text-decoration: none;
+      color: #7a4212;
+      font-size: 14px;
+      padding: 0 15px;
+    }
+
+    .main-nav a:first-child {
+      padding-left: 24px;
+    }
+
+    .main-nav a:not(:last-child) {
+      border-right: 1px solid #e0d8c0;
+    }
+
+    .toggle-sidebar-btn {
+      margin: 15px;
+      background-color: #7a4212;
+      color: white;
+      padding: 10px 20px;
+      border: 1px solid #7a4212;
+      border-radius: 20px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .shop-layout {
+      display: flex;
+    }
+
+    .shop-sidebar {
+      width: 220px;
+      background-color: #b99d7f;
+      padding: 30px 20px;
+      box-shadow: 3px 0 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .shop-sidebar ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .shop-sidebar li {
+      margin-bottom: 15px;
+    }
+
+    .shop-sidebar a {
+      text-decoration: none;
+      color: #4d2e17;
+      font-size: 16px;
+      display: block;
+      transition: 0.2s;
+    }
+
+    .shop-sidebar a:hover {
+      color: #fff;
+      background-color: #7a4212;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    .product-area {
+      flex: 1;
+      padding: 30px;
+      padding-bottom: 80px;
+      background-color: #f8f4e8;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+    }
+
+    .product-card {
+      background-color: #f3ecdf;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      height: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: contain;
+      margin-bottom: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .product-name {
+      font-weight: normal;
+      margin: 8px 0 4px;
+    }
+
+    .product-price {
+      font-weight: bold;
+      color: #4d2e17;
+    }
+
+    @media (max-width: 1024px) {
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="profile.html" class="sign-in">
+      <img src="https://icons.veryicon.com/png/o/education-technology/education-cloud/username-1.png" alt="User Icon" />
+      <span>Username</span>
+    </a>
+
+    <div class="top-bar">
+      <h1 class="logo"><a href="index.html">CODE & GLOW</a></h1>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search..." />
+      </div>
+      <div class="user-actions">
+        <a href="#" class="wishlist">
+          <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="Wishlist" />
+        </a>
+        <a href="#" class="cart">
+          <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Cart" />
+        </a>
+      </div>
+    </div>
+
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="flashsales.html">Offers</a>
+      <a href="objective_purpose.html">About Us</a>
+    </nav>
+  </header>
+
+  <a href="shop.html" class="toggle-sidebar-btn">Categories</a>
+
+  <div class="shop-layout">
+    <aside class="shop-sidebar">
+      <ul>
+        <li><a href="hair.html">Hair Products</a></li>
+        <li><a href="nail.html">Nail Products</a></li>
+        <li><a href="face.html">Face Products</a></li>
+        <li><a href="cosmeticproducts.html">Cosmetics</a></li>
+        <li><a href="services.html">Services</a></li>
+      </ul>
+    </aside>
+
+   <style>
+      .product-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-card:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+      }
+
+      .product-card img {
+        transition: transform 0.3s ease;
+      }
+
+      .product-card:hover img {
+        transform: scale(1.05);
+      }
+    </style>
+
+    <main class="product-area" id="productArea">
+      <div style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 15px; align-items: center;">
+  <select id="sortPrice" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+    <option value="">Sort by Price</option>
+    <option value="asc">Low to High</option>
+    <option value="desc">High to Low</option>
+  </select>
+  <select id="filterBrand" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;">
+    <option value="">Filter by Brand</option>
+    <option value="kleancolor">KleanColor</option>
+    <option value="modelones">Modelones</option>
+    <option value="nailtime4you">NailTime4You</option>
+    <option value="makartt">Makartt</option>
+    <option value="pics">Pics</option>
+    <option value="lucky color">Lucky Color</option>
+    <option value="onyx">ONYX</option>
+    <option value="sephora">Sephora</option>
+  </select>
+</div>
+
+      <div class="product-grid" id="productGrid">
+        <div class="product-card">
+          <img
+            src="https://i5.walmartimages.com/asr/33454a37-a9b1-4ae8-8326-d756cd46c482_6.78ba75aa6b05d6212aa15f20feb23873.png?fbclid=IwY2xjawKXZeBleHRuA2FlbQIxMABicmlkETFMU2hTNDE3ZE93Y0RIWWthAR5uCzO8mxe99KYw0N3y6GTvil0YfMEblBHVbUMWfonxMKXr-7t40LGC7THxhQ_aem_YsQRRseppUKfKnnE2E9xgQ" />
+          <p class="product-name">KleanColor Nail Polish</p>
+          <p class="product-price">Php 150</p>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://www.garnesguide.com/content/images/2023/04/Modelones-Gel-Nail-Polish-Set.jpg?fbclid=IwY2xjawKXZgpleHRuA2FlbQIxMABicmlkETFMU2hTNDE3ZE93Y0RIWWthAR7KPZonl2al0p9yT_3YmJgTcK9P-hXH2CjORrnNUPAvN1vuZpaiic08sFAFug_aem_FdnjiE3NysCePjtYrIiidQ" />
+          <p class="product-name">Modelones Gel Nail Polish Kit</p>
+          <p class="product-price">Php 399</p>
+        </div>
+        <div class="product-card">
+          <a href="NAILTIME4YOU.html" style="text-decoration: none; color: inherit; display: block; width: 100%; height: 100%;">
+            <img
+              src="https://i.etsystatic.com/18442207/r/il/9cfd33/3673984929/il_fullxfull.3673984929_6xcv.jpg?fbclid=IwY2xjawKXZh5leHRuA2FlbQIxMABicmlkETFMU2hTNDE3ZE93Y0RIWWthAR7KPZonl2al0p9yT_3YmJgTcK9P-hXH2CjORrnNUPAvN1vuZpaiic08sFAFug_aem_FdnjiE3NysCePjtYrIiidQ" />
+            <p class="product-name">NAILTIME4YOU Press-On Nails</p>
+            <p class="product-price">Php 199</p>
+          </a>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://images.bonanzastatic.com/afu/images/a99f/7a1e/371c_9518235662/s-l1600.jpg?fbclid=IwY2xjawKXZlBleHRuA2FlbQIxMABicmlkETFMU2hTNDE3ZE93Y0RIWWthAR7th5TvOWDFGsX1lgH0Lda8gYDPoFHTqTl3lVPp06L7ffOCzn0pmwStaiUq0A_aem_r8z51uwDAgV0iSk0xgEuTA" />
+          <p class="product-name">Modelones All-in-One Gel Nail Kit</p>
+          <p class="product-price">Php 599</p>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://m.media-amazon.com/images/I/61qnbx+NP8L._SL1500_.jpg?fbclid=IwY2xjawKXZ5hleHRuA2FlbQIxMABicmlkETFMU2hTNDE3ZE93Y0RIWWthAR4-IK2TOE-ivHNNbWCHecH0mGGmCySLvXuxO-DKyckAI12oEZS-bm7zAvgPDQ_aem_hKWjVzBIS8RhP0Ok00BHoA" />
+          <p class="product-name">Makartt Solid Nail Glue Gel – Blanc (15ml)</p>
+          <p class="product-price">Php 129</p>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://m.media-amazon.com/images/I/61sTbifmn1L._AC_SL1500_.jpg?fbclid=IwY2xjawKXZ75leHRuA2FlbQIxMABicmlkETFMU2hTNDE3ZE93Y0RIWWthAR5ul3kQ6YU_-9lhi-Xm9BwwgnbyMCxNNmT1AS0XAZwG5LtMO9W8MvlfNCdTOQ_aem_mnrZ-0pz0T6fgNY8vDt4_w" />
+          <p class="product-name">Pics Nails Cuticle Remover</p>
+          <p class="product-price">Php 50</p>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://ae01.alicdn.com/kf/HTB1n6FQxCtYBeNjSspkq6zU8VXad/Nail-Polish-Remover-For-Nails-Varnish-Only-Non-Acetone-Soak-off-Quick-Cleaner-Liquid-1-Bottle.jpg?fbclid=IwY2xjawKZP05leHRuA2FlbQIxMQABHl7Ar8fup-b-xEEYDJAvJtQMI_MPyLKXqoksS3WoEh94JphGXwr8yNj3zYPC_aem__64PgMAJ0C9LR9BNxzgcbg" />
+          <p class="product-name">Lucky Color Nail Polish Remover – 100ml (3.4 fl. oz)</p>
+          <p class="product-price">Php 79</p>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://cdn1.skinsafeproducts.com/photo/469B00AFCC3941/large_1700479342.pngpng?1700479342&fbclid=IwY2xjawKZP3lleHRuA2FlbQIxMQABHgeDaJf0bIG9eaEHsIYRVgXW2jvzymuX7U471qjoPkLxIMZzJUF1OEEz3uyt_aem_HhhSXix0tYtRBdvCsR-DgQ" />
+          <p class="product-name">ONYX Professional Acetone Nail Polish Remover Wipes – 10 Pack</p>
+          <p class="product-price">Php 49</p>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://i5.walmartimages.com/asr/7ffa3ea8-b8f0-473e-9b84-2f16a2d48586.39990aa2bb7b29605da538a51cdb835a.jpeg?odnWidth=1000&odnHeight=1000&odnBg=ffffff&fbclid=IwY2xjawKZP6xleHRuA2FlbQIxMQABHqdVORbqyitqYepiY3XwjmP48Ec2wWr4XLWligHym6_CQw1iwSMMDf12v_W0_aem_ESFvtqsbaA6fGrUC70DYFA" />
+          <p class="product-name">Colorful Coffin Press-On Nails Set – 240 Pcs</p>
+          <p class="product-price">Php 299</p>
+        </div>
+        <div class="product-card">
+          <img
+            src="https://m.media-amazon.com/images/I/61sW5p43NEL.jpg?fbclid=IwY2xjawKXdNlleHRuA2FlbQIxMABicmlkETFMU2hTNDE3ZE93Y0RIWWthAR7KPZonl2al0p9yT_3YmJgTcK9P-hXH2CjORrnNUPAvN1vuZpaiic08sFAFug_aem_FdnjiE3NysCePjtYrIiidQ" />
+          <p class="product-name">Stainless Steel Double-Ended Cuticle Pusher & Scraper Tool</p>
+          <p class="product-price">Php 89</p>
+        </div>
+        <div class="product-card">
+          <img src="https://image-optimizer-reg.production.sephora-asia.net/images/product_images/closeup_1_Product_3378872213826-Sephora-Collection-Gentle-Nail-Polis_e96a86c14fce88558efb65cece45dbf87f499c08_1709293258.png?o=clean" />
+          <p class="product-name">Sephora Gentle Nail Polish Remover</p>
+          <p class="product-price">Php 299</p>
+        </div>
+        <div class="product-card">
+          <img src="https://image-optimizer-reg.production.sephora-asia.net/images/product_images/closeup_1_Product_3378872213475-Sephora-Collection-Manicure-Duo-Defa_740596b621caca14ffec535c4f4e803a00a73958_1709293255.png?o=clean" />
+          <p class="product-name">Sephora Manicure Duo</p>
+          <p class="product-price">Php 199</p>
+        </div>
+      </div>
+    </main>
+  </div>
+
+<!-- FOOTER -->
+  <section style="background-color: #f0ece6; padding: 40px 20px; border-top: 1px solid #ddd;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 20px; max-width: 1100px; margin: auto;">
+      <div style="flex: 1 1 300px; text-align: left;">
+        <h3 style="margin-bottom: 10px; color: #000;">CUSTOMERS SERVICE:</h3>
+        <p><strong>EMAIL:</strong> <a href="mailto:CUSTOMERSERVICE@CODEANDGLOWSALON.COM" style="color: #000; text-decoration: none;">CUSTOMERSERVICE@CODEANDGLOWSALON.COM</a></p>
+        <p><strong>PHONE:</strong> <a href="tel:1-800-123-4567" style="color: #000; text-decoration: none;">1-800-123-4567</a></p>
+        <p><strong>Operating Hours:</strong><br>Monday-Friday: 9 AM - 8 PM EST<br>Saturday: 10 AM - 5 PM EST</p>
+      </div>
+      <div style="flex: 1 1 200px;">
+        <ul style="list-style: none; padding: 0;">
+          <li><a href="shipping.html" style="text-decoration: none; color: #000;">FAQs</a></li>
+          <li><a href="privacy.html" style="text-decoration: none; color: #000;">Privacy Policy</a></li>
+          <li><a href="terms.html" style="text-decoration: none; color: #000;">Terms</a></li>
+        </ul>
+      </div>
+      <div style="flex: 1 1 200px; text-align: right;">
+        <p>Connect With Us</p>
+        <a href="https://facebook.com" target="_blank" style="margin-right: 10px;">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" style="width: 30px;">
+        </a>
+        <a href="https://instagram.com" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Instagram" style="width: 30px;">
+        </a>
+        <div style="margin-top: 20px;">
+          <img src="https://i.pinimg.com/736x/b8/f7/a1/b8f7a136ed384bbbddb50986e194f940.jpg" alt="Code & Glow Logo" style="width: 100px;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    document.getElementById("searchInput").addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        const query = this.value.trim().toLowerCase();
+        if (query.includes("hair")) window.location.href = "hairproducts.html";
+        else if (query.includes("cos") || query.includes("cosmetic")) window.location.href = "cosmeticproducts.html";
+        else if (query.includes("nail")) window.location.href = "nailproducts.html";
+        else if (query.includes("face") || query.includes("skin") || query.includes("skincare")) window.location.href = "faceproducts.html";
+        else if (query.includes("service")) window.location.href = "servicesto.html";
+        else alert("No results found.");
+      }
+    });
+  </script>
+
+  <script>
+  function normalizePrice(priceText) {
+    const match = priceText.match(/\d+/g);
+    return match ? parseInt(match[0], 10) : 0;
+  }
+
+  function getBrand(text) {
+    const brandMap = {
+      "kleancolor": /kleancolor/i,
+      "modelones": /modelones/i,
+      "nailtime4you": /nailtime/i,
+      "makartt": /makartt/i,
+      "pics": /pics/i,
+      "lucky color": /lucky color/i,
+      "onyx": /onyx/i,
+      "sephora": /sephora/i
+    };
+    for (const [brand, regex] of Object.entries(brandMap)) {
+      if (regex.test(text)) return brand;
+    }
+    return "";
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const grid = document.getElementById("productGrid");
+    const cards = Array.from(grid.getElementsByClassName("product-card"));
+
+    document.getElementById("sortPrice").addEventListener("change", function () {
+      const sorted = [...cards].sort((a, b) => {
+        const priceA = normalizePrice(a.querySelector(".product-price").innerText);
+        const priceB = normalizePrice(b.querySelector(".product-price").innerText);
+        return this.value === "asc" ? priceA - priceB : priceB - priceA;
+      });
+      sorted.forEach(card => grid.appendChild(card));
+    });
+
+    document.getElementById("filterBrand").addEventListener("change", function () {
+      const selected = this.value;
+      cards.forEach(card => {
+        const brand = getBrand(card.innerText);
+        card.style.display = !selected || brand === selected ? "block" : "none";
+      });
+    });
+  });
+</script>
+
+   <script src="cart.js"></script>
+   <script>
+  const user = localStorage.getItem("currentUser");
+  if (user) {
+    const signInLink = document.querySelector('.sign-in');
+    if (signInLink) {
+      signInLink.innerHTML = `
+        <img src="https://icons.veryicon.com/png/o/education-technology/education-cloud/username-1.png" alt="User Icon" />
+        <span>${user}</span>
+      `;
+      signInLink.href = "profile.html"; 
+    }
+  }
+</script>
+</body>
+</html>

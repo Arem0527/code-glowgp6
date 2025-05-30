@@ -1,0 +1,53 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up | Code & Glow</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="signup-page">
+  <div class="login-container">
+    <img src="https://i.pinimg.com/736x/f7/c3/44/f7c34413afd34832c29e373f151f5c24.jpg" alt="Logo" class="logo-icon" />
+    <h1 class="logo-text">CODE & GLOW</h1>
+
+    <div class="login-box">
+      <h2>Create Account</h2>
+      <form id="signupForm">
+        <input type="text" id="signupUsername" placeholder="Username" required />
+        <input type="text" id="signupContact" placeholder="Mobile number or email" required />
+        <input type="password" id="signupPassword" placeholder="Password" required />
+        <input type="password" id="signupRePassword" placeholder="Re-enter password" required />
+        <button type="submit">Continue</button>
+      </form>
+      <p class="signup-text">Already have an account? <a href="login.html">Login here</a></p>
+    </div>
+
+    <footer class="login-footer">
+      <p>© 2025 Code & Glow all rights reserved</p>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const username = document.getElementById("signupUsername").value.trim();
+      const contact = document.getElementById("signupContact").value.trim();
+      const password = document.getElementById("signupPassword").value;
+      const rePassword = document.getElementById("signupRePassword").value;
+
+      if (password !== rePassword) {
+        alert("Passwords do not match.");
+        return;
+      }
+
+      // Save to localStorage
+      localStorage.setItem("username", username);
+      alert("Account created successfully! Now login.");
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>

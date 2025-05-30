@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders | Code & Glow</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: serif;
+            background-color: #f8f4e8;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #f8f4e8;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding-top: 30px;
+        }
+
+        .sign-in {
+            position: absolute;
+            top: 5px;
+            right: 120px;
+            display: flex;
+            align-items: center;
+            color: #7a4212;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .sign-in img {
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px 15px;
+        }
+
+        .logo {
+            margin: 0;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: #7a4212;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .search-bar {
+            flex: 1;
+            margin: 0 25px;
+            margin-right: 40px;
+        }
+
+        .search-bar input {
+            padding: 8px 16px;
+            border-radius: 9999px;
+            border: 1px solid #ddd;
+            width: 100%;
+            background-color: #fff;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .wishlist img,
+        .cart img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .main-nav {
+            display: flex;
+            padding: 10px 0;
+            background-color: #f8f4e8;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #7a4212;
+            font-size: 14px;
+            padding: 0 15px;
+        }
+
+        .main-nav a:first-child {
+            padding-left: 24px;
+        }
+
+        .main-nav a:not(:last-child) {
+            border-right: 1px solid #e0d8c0;
+        }
+
+        .profile-container {
+            display: flex;
+            padding: 40px;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .user-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .user-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        .username {
+            font-size: 18px;
+            color: #4d2e17;
+            margin-bottom: 5px;
+        }
+
+        .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links li {
+            margin-bottom: 10px;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 10px;
+            color: #7a4212;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .nav-links a.active,
+        .nav-links a:hover {
+            background-color: #f3ecdf;
+        }
+
+        .main-content {
+            flex: 1;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Orders specific styles */
+        .order-tabs {
+            display: flex;
+            background-color: #7a4212;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .order-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            color: white;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .order-tab.active {
+            background-color: #5e310e;
+        }
+
+        .order-content {
+            display: none;
+        }
+
+        .order-content.active {
+            display: block;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background-color: #fff;
+        }
+
+        .product-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+
+        .product-details {
+            flex: 1;
+        }
+
+        .product-name {
+            font-weight: bold;
+            color: #7a4212;
+            margin-bottom: 5px;
+        }
+
+        .product-variant {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .order-total {
+            color: #7a4212;
+            font-size: 14px;
+            margin-right: 20px;
+        }
+
+        .buy-again-btn {
+            padding: 8px 16px;
+            background-color: #7a4212;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        .buy-again-btn:hover {
+            background-color: #5e310e;
+        }
+
+        .order-history {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #7a4212;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="profile.html" class="sign-in">
+            <img src="https://icons.veryicon.com/png/o/education-technology/education-cloud/username-1.png" alt="User Icon" />
+            <span>Username</span>
+        </a>
+
+        <div class="top-bar">
+            <h1 class="logo"><a href="index.html">CODE & GLOW</a></h1>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search..." />
+            </div>
+            <div class="user-actions">
+                <a href="#" class="wishlist">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png" alt="Wishlist" />
+                </a>
+                <a href="#" class="cart">
+                    <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Cart" />
+                </a>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="flashsales.html">Offers</a>
+            <a href="objective_purpose.html">About Us</a>
+        </nav>
+    </header>
+
+    <div class="profile-container">
+        <aside class="sidebar">
+            <div class="user-info">
+                <img src="https://icons.veryicon.com/png/o/education-technology/education-cloud/username-1.png" alt="User Avatar" class="user-avatar" id="currentAvatar">
+                <h2 class="username" id="profileUsername">username</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="profile.html">Personal Details</a></li>
+                <li><a href="address.html">Address</a></li>
+                <li><a href="orders.html" class="active">Orders</a></li>
+                <li><a href="#" id="logoutBtn">Logout</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="order-tabs">
+                <button class="order-tab active" onclick="showTab('new')">New Purchases</button>
+                <button class="order-tab" onclick="showTab('preparing')">Being Prepared</button>
+                <button class="order-tab" onclick="showTab('shipped')">Shipped</button>
+                <button class="order-tab" onclick="showTab('cancelled')">Cancelled</button>
+            </div>
+
+            <div id="newPurchases" class="order-content active">
+                <div class="order-item">
+                    <img src="https://example.com/lipstick1.jpg" alt="Product" class="product-image">
+                    <div class="product-details">
+                        <div class="product-name">Product Name</div>
+                        <div class="product-variant">Variant</div>
+                    </div>
+                    <div class="order-total">Total 1 item: ₱250</div>
+                    <button class="buy-again-btn" onclick="buyAgain(1)">Buy Again</button>
+                </div>
+                <!-- More order items -->
+            </div>
+
+            <div id="beingPrepared" class="order-content">
+                <!-- Being prepared orders will be loaded here -->
+            </div>
+
+            <div id="shipped" class="order-content">
+                <!-- Shipped orders will be loaded here -->
+            </div>
+
+            <div id="cancelled" class="order-content">
+                <!-- Cancelled orders will be loaded here -->
+            </div>
+
+            <div class="order-history">
+                Order History
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Load user data
+        document.addEventListener('DOMContentLoaded', function() {
+            const user = localStorage.getItem('currentUser');
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Update username displays
+            document.getElementById('profileUsername').textContent = user;
+            const signInSpan = document.querySelector('.sign-in span');
+            if (signInSpan) {
+                signInSpan.textContent = user;
+            }
+
+            // Load orders from localStorage
+            loadOrders();
+        });
+
+        // Handle logout
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        });
+
+        // Show selected tab
+        function showTab(tabName) {
+            // Hide all content
+            document.querySelectorAll('.order-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.order-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected content and activate tab
+            document.getElementById(tabName === 'new' ? 'newPurchases' : tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Load orders from localStorage
+        function loadOrders() {
+            const user = localStorage.getItem('currentUser');
+            if (!user) return;
+
+            const orders = JSON.parse(localStorage.getItem('orders_' + user) || '[]');
+            
+            // Example order data structure
+            const sampleOrders = [
+                {
+                    id: 1,
+                    image: 'https://example.com/lipstick1.jpg',
+                    name: 'Product Name',
+                    variant: 'Variant',
+                    quantity: 1,
+                    price: 250,
+                    status: 'new'
+                },
+                // Add more sample orders as needed
+            ];
+
+            // Save sample orders if no orders exist
+            if (orders.length === 0) {
+                localStorage.setItem('orders_' + user, JSON.stringify(sampleOrders));
+            }
+
+            // Display orders in appropriate tabs
+            displayOrders(orders);
+        }
+
+        // Display orders in their respective tabs
+        function displayOrders(orders) {
+            const statusContainers = {
+                new: document.getElementById('newPurchases'),
+                preparing: document.getElementById('beingPrepared'),
+                shipped: document.getElementById('shipped'),
+                cancelled: document.getElementById('cancelled')
+            };
+
+            // Clear existing orders
+            Object.values(statusContainers).forEach(container => {
+                container.innerHTML = '';
+            });
+
+            // Display orders
+            orders.forEach(order => {
+                const orderHTML = `
+                    <div class="order-item">
+                        <img src="${order.image}" alt="${order.name}" class="product-image">
+                        <div class="product-details">
+                            <div class="product-name">${order.name}</div>
+                            <div class="product-variant">${order.variant}</div>
+                        </div>
+                        <div class="order-total">Total ${order.quantity} item: ₱${order.price}</div>
+                        <button class="buy-again-btn" onclick="buyAgain(${order.id})">Buy Again</button>
+                    </div>
+                `;
+
+                if (statusContainers[order.status]) {
+                    statusContainers[order.status].innerHTML += orderHTML;
+                }
+            });
+        }
+
+        // Buy again functionality
+        function buyAgain(orderId) {
+            const user = localStorage.getItem('currentUser');
+            if (!user) return;
+
+            const orders = JSON.parse(localStorage.getItem('orders_' + user) || '[]');
+            const order = orders.find(o => o.id === orderId);
+
+            if (order) {
+                // Add to cart
+                const cart = JSON.parse(localStorage.getItem('cart_' + user) || '[]');
+                cart.push({
+                    id: order.id,
+                    name: order.name,
+                    variant: order.variant,
+                    price: order.price,
+                    quantity: 1
+                });
+                localStorage.setItem('cart_' + user, JSON.stringify(cart));
+                alert('Product added to cart!');
+            }
+        }
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                const query = this.value.trim().toLowerCase();
+                if (query.includes('hair')) {
+                    window.location.href = 'hairproducts.html';
+                } else if (query.includes('cos') || query.includes('cosmetic')) {
+                    window.location.href = 'cosmetics.html';
+                } else if (query.includes('nail')) {
+                    window.location.href = 'nailproducts.html';
+                } else if (query.includes('face') || query.includes('skin') || query.includes('skincare')) {
+                    window.location.href = 'faceproducts.html';
+                } else if (query.includes('service')) {
+                    window.location.href = 'servicesto.html';
+                } else {
+                    alert('No results found.');
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

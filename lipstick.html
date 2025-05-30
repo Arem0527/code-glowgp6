@@ -1,0 +1,1188 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cosmetics | Code &amp; Glow</title>
+<style>
+         html, body {
+        margin: 0;
+        padding: 0;
+        font-family: serif;
+        
+        background-color: #f8f4e8;
+        height: auto;
+        overflow-x: hidden;
+        }
+        header {
+            background-color: #f8f4e8;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding-top: 30px;
+        }
+
+        .sign-in {
+            position: absolute;
+            top: 5px;
+            right: 120px;
+            display: flex;
+            align-items: center;
+            color: #7a4212;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .sign-in img {
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 24px 15px;
+        }
+
+        .logo a {
+            text-decoration: none;
+            color: #7a4212;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .search-bar {
+            flex: 1;
+            margin: 0 25px;
+            margin-right: 40px;
+        }
+
+        .search-bar input {
+            padding: 8px 16px;
+            border-radius: 9999px;
+            border: 1px solid #ddd;
+            width: 100%;
+            background-color: #fff;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .wishlist img,
+        .cart img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .main-nav {
+            display: flex;
+            padding: 10px 0;
+            background-color: #f8f4e8;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #7a4212;
+            font-size: 14px;
+            padding: 0 15px;
+        }
+
+        .main-nav a:first-child {
+            padding-left: 24px;
+        }
+
+        .main-nav a:not(:last-child) {
+            border-right: 1px solid #e0d8c0;
+        }
+
+        .toggle-sidebar-btn {
+            margin: 15px;
+            background-color: #7a4212;
+            color: white;
+            padding: 10px 20px;
+            border: 1px solid #7a4212;
+            border-radius: 20px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+       .shop-layout {
+        display: flex;
+        }
+
+        .shop-sidebar {
+            width: 220px;
+            background-color: #b99d7f;
+            padding: 30px 20px;
+            box-shadow: 3px 0 8px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        .shop-sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .shop-sidebar li {
+            margin-bottom: 15px;
+        }
+
+        .shop-sidebar a {
+            text-decoration: none;
+            color: #4d2e17;
+            font-size: 16px;
+            display: block;
+            transition: 0.2s;
+        }
+
+        .shop-sidebar a:hover {
+            color: #fff;
+            background-color: #7a4212;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .product-area {
+        flex: 1;
+         padding: 30px;
+        background-color: #f8f4e8;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: #f3ecdf;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: contain;
+            margin-bottom: 10px;
+        }
+
+        .product-name {
+            font-weight: normal;
+            margin: 8px 0 4px;
+        }
+
+        .product-price {
+            font-weight: bold;
+            color: #4d2e17;
+        }
+
+        button {
+            background-color: white;
+            border: 1px solid #7a4212;
+            color: #7a4212;
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s ease;
+        }
+
+        button:hover {
+            background-color: #7a4212;
+            color: white;
+        }
+
+        #checkoutSidebar {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 350px;
+            height: 100%;
+            background-color: #a57d5a;
+            padding: 20px;
+            transition: right 0.3s ease;
+            z-index: 1001;
+            overflow-y: auto;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+
+
+        @media (max-width: 1024px) {
+            .product-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .shade-btn {
+            padding: 8px 12px;
+            border: 1px solid #7a4212;
+            background-color: white;
+            color: #7a4212;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .shade-btn:hover {
+            background-color: #f0e6dc;
+        }
+
+        .shade-btn.active {
+            background-color: #7a4212;
+            color: white;
+        }
+
+        #quantityInput::-webkit-inner-spin-button,
+        #quantityInput::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        #quantityInput {
+            -moz-appearance: textfield;
+            padding: 5px;
+            border: 1px solid #7a4212;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        #decreaseQuantity,
+        #increaseQuantity {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border: 1px solid #7a4212;
+            color: #7a4212;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #decreaseQuantity:hover,
+        #increaseQuantity:hover {
+            background-color: #7a4212;
+            color: white;
+        }
+
+        #decreaseQuantity:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+<header>
+<a class="sign-in" href="profile.html">
+<img alt="User Icon" src="https://icons.veryicon.com/png/o/education-technology/education-cloud/username-1.png"/>
+<span>Username</span>
+</a>
+<div class="top-bar">
+<h1 class="logo"><a href="index.html">CODE &amp; GLOW</a></h1>
+<div class="search-bar">
+<input id="searchInput" placeholder="Search..." type="text"/>
+</div>
+<script>
+                document.getElementById("searchInput").addEventListener("keydown", function (event) {
+                    if (event.key === "Enter") {
+                        const query = this.value.trim().toLowerCase();
+
+                        if (
+                            query === "h" || query === "ha" || query === "hai" || query === "hair" || query.includes("hair pro") || query.includes("hair products")
+                        ) {
+                            window.location.href = "hairproducts.html";
+                        } else if (
+                            query === "c" || query === "co" || query === "cos" || query === "cosme" || query === "cosmetics" || query.includes("cosmetic")
+                        ) {
+                            window.location.href = "cosmetics.html";
+                        } else {
+                            alert("No results found.");
+                        }
+                    }
+                });
+            </script>
+<div class="user-actions">
+<a class="wishlist" href="#">
+<img alt="Wishlist" src="https://cdn-icons-png.flaticon.com/512/1077/1077035.png"/>
+</a>
+<a class="cart" href="#">
+<img alt="Cart" src="https://cdn-icons-png.flaticon.com/512/263/263142.png"/>
+</a>
+</div>
+</div>
+<nav class="main-nav">
+<a href="index.html">Home</a>
+<a href="shop.html">Shop</a>
+<a href="flashsales.html">Offers</a>
+<a href="objective_purpose.html">About Us</a>
+</nav>
+</header>
+<div class="shop-layout">
+<main class="product-area" id="productArea">
+<div style="display: flex; gap: 40px; align-items: flex-start; margin-top: 30px; margin-bottom: 70px;">
+<!-- Product Image & Thumbnails -->
+<div style="margin-left: 150px;">
+<img alt="Main Product" id="mainImage" src="https://image-optimizer-reg.production.sephora-asia.net/images/product_images/closeup_1_Product_840122905056-RARE-BEAUTY-Kind-Words-Matte-Lipstick-Worthy_fef0d1d0a13338973cb00176d5f88a1119c52c2f_1655140249.png" style="width: 500px; border-radius: 10px;"/>
+<div style="display: flex; align-items: center; gap: 10px; justify-content: center; margin-top: 10px;">
+<span style="font-size: 24px; cursor: pointer;" id="prevImage">&lt;</span>
+<img alt="Thumb 1" class="thumbnail active" onclick="changeImage(0)" src="https://image-optimizer-reg.production.sephora-asia.net/images/product_images/closeup_1_Product_840122905056-RARE-BEAUTY-Kind-Words-Matte-Lipstick-Worthy_fef0d1d0a13338973cb00176d5f88a1119c52c2f_1655140249.png" style="width: 60px; border-radius: 5px; cursor: pointer; border: 2px solid transparent;"/>
+<img alt="Thumb 2" class="thumbnail" onclick="changeImage(1)" src="https://www.sephora.com/productimages/sku/s2590057-main-zoom.jpg" style="width: 60px; border-radius: 5px; cursor: pointer; border: 2px solid transparent;"/>
+<img alt="Thumb 3" class="thumbnail" onclick="changeImage(2)" src="https://www.sephora.com/productimages/sku/s2590065-main-zoom.jpg" style="width: 60px; border-radius: 5px; cursor: pointer; border: 2px solid transparent;"/>
+<span style="font-size: 24px; cursor: pointer;" id="nextImage">&gt;</span>
+</div>
+<div data-image="https://image-optimizer-reg.production.sephora-asia.net/images/product_images/closeup_1_Product_840122905056-RARE-BEAUTY-Kind-Words-Matte-Lipstick-Worthy_fef0d1d0a13338973cb00176d5f88a1119c52c2f_1655140249.png" data-name="Kind Words Matte Lipstick" data-price="₱250" data-shade="Worthy" id="favoriteBtn" style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 15px; color: #7a4212; font-size: 15px; cursor: pointer;">
+<button id="heartIcon" style="font-size: 30px; background: none; border: none; color: #7a4212;">♡</button>
+<span style="font-size: 25px;">Favorite</span>
+</div>
+</div>
+<!-- Product Info -->
+<div>
+<h2 style="margin: 0; margin-left: 100px; font-size: 50px;">Kind Words Matte <br/> Lipstick • 3.5g
+                    </h2>
+<p style="margin-left: 100px; font-size: 20px;">4.7<span style="color: gold;">     ★ ★ ★
+                            ★</span>   <a href="#reviews" class="review-link">100
+                            Reviews</a>
+</p>
+<p style="margin-left: 100px; font-size: 40px; font-weight: bold;">₱250</p>
+<p id="toggle-details" style="color: #7a4212; font-weight: bold; cursor: pointer; font-size: 24px; margin: 30px 0; padding-left: 100px;">Product details</p>
+<div id="product-details" style="margin: 15px 100px; display: none; background: #fff7ef; padding: 25px; border: 1px solid #e0d8c0; border-radius: 10px;">
+<h3 style="margin-top: 0;">Product Description</h3>
+<p>Experience bold color in one swipe with Rare Beauty's Kind Words Matte Lipstick. Developed by Selena Gomez, this lipstick delivers rich pigment with a smooth, airy-matte finish that lasts all day without drying out your lips.</p>
+<h4>Key Features</h4>
+<ul>
+<li>Soft matte finish</li>
+<li>Long-lasting and smudge-resistant</li>
+<li>Enriched with nourishing ingredients like sunflower seed oil and vitamin E</li>
+<li>Lightweight, non-drying formula</li>
+<li>Vegan and cruelty-free</li>
+</ul>
+<h4>Available Shades</h4>
+<ul>
+<li>Talented – true neutral beige</li>
+<li>Strong – rich chocolate brown</li>
+<li>Bold – deep berry</li>
+<li>Lively – rose pink</li>
+<li>Gifted – soft mauve</li>
+</ul>
+</div>
+<!-- Shade Options -->
+<div style="margin: 15px 0;">
+<p style="margin: 5px 0; font-weight: 900;">Shade</p>
+<div style="
+                                                display: grid;
+                                                grid-template-columns: repeat(4, 1fr);
+                                                gap: 10px;
+                                                max-width: 500px;">
+<button class="shade-btn" data-shade="Red">Red</button>
+<button class="shade-btn" data-shade="Sunset Sorbet">Sunset Sorbet</button>
+<button class="shade-btn" data-shade="Nude">Nude</button>
+<button class="shade-btn" data-shade="Sweet Pink">Sweet Pink</button>
+<button class="shade-btn" data-shade="Velvet Teddy">Velvet Teddy</button>
+<button class="shade-btn" data-shade="Rose Blossom">Rose Blossom</button>
+<button class="shade-btn" data-shade="Diva">Diva</button>
+<button class="shade-btn" data-shade="Plumful">Plumful</button>
+</div>
+</div>
+<!-- Quantity -->
+<div style="margin: 15px 0;">
+<p style="margin: 5px 0;">Quantity</p>
+<div style="display: flex; align-items: center; gap: 10px;">
+<button id="decreaseQuantity">-</button>
+<input id="quantityInput" style="width: 50px; text-align: center;" type="number" value="1" min="1" max="10"/>
+<button id="increaseQuantity">+</button>
+</div>
+</div>
+<!-- Action Buttons -->
+<div style="margin-top: 20px; display: flex; gap: 15px;">
+<button id="addToCartBtn" style="background-color: #5a2c06; color: white; padding: 10px 20px;">🛒 Add To Cart</button>
+<button style="background-color: #5a2c06; color: white; padding: 10px 20px;">Buy Now</button>
+</div>
+</div>
+</div>
+<!-- Cart Sidebar -->
+<div id="cartSidebar" style="
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 350px;
+    height: 100%;
+    background-color: #a57d5a;
+    padding: 20px;
+    transition: right 0.3s ease;
+    z-index: 1001;
+    overflow-y: auto;
+    font-family: Arial, sans-serif;
+    color: white;
+">
+<h3 style="display: flex; align-items: center; justify-content: space-between; color: white;">
+                    Your Cart
+                    <img alt="Cart" src="https://cdn-icons-png.flaticon.com/512/263/263142.png" style="width: 20px;"/>
+</h3>
+<hr style="border-color: #d4bfa8;"/>
+<!-- Dynamic Cart Items -->
+<div id="cartItemsContainer" style="margin-bottom: 20px;"></div>
+<!-- Discount Code -->
+<div style="margin-top: 20px; color: white;">
+<label for="discount">Discount Code:</label><br/>
+<input id="discount" placeholder="Select or Enter Code" style="
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+            border: none;
+            background-color: #e4d5c5;
+            color: black;
+        " type="text"/>
+</div>
+<!-- Total and Checkout -->
+<div style="margin-top: 15px; color: white;">
+<p>Total (0 items): <strong>₱0</strong></p>
+<button style="
+            width: 100%;
+            background-color: #4d2c16;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+        ">Check Out</button>
+</div>
+</div>
+<div id="favoriteSidebar" style="
+                        display: none;
+                        position: fixed;
+                        top: 0;
+                        right: -400px;
+                        width: 350px;
+                        height: 100%;
+                        background-color: #a57d5a;
+                        padding: 20px;
+                        transition: right 0.3s ease;
+                        z-index: 1001;
+                        overflow-y: auto;
+                        font-family: Arial, sans-serif;
+                        color: white;
+                    ">
+<h3 style="color: white; margin-bottom: 10px;">Favorites</h3>
+<div id="favoriteItemsContainer"></div>
+</div>
+<div id="checkoutSidebar" style="
+                        display: none;
+                        position: fixed;
+                        top: 0;
+                        right: -400px;
+                        width: 350px;
+                        height: 100%;
+                        background-color: #a57d5a;
+                        padding: 20px;
+                        transition: right 0.3s ease;
+                        z-index: 1001;
+                        overflow-y: auto;
+                        font-family: Arial, sans-serif;
+                        color: white;
+                    ">
+</div>
+<script>
+                const checkoutSidebar = document.getElementById('checkoutSidebar');
+                const checkoutButton = cartSidebar.querySelector('button'); // The checkout button in cart
+
+                // Function to render checkout summary
+                function renderCheckout() {
+                    const cartItems = getCartItems();
+                    const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+                    checkoutSidebar.innerHTML = `
+  <h3 style="color: #fff; margin-bottom: 10px;">Order Summary</h3>
+  <p style="font-size: 14px; margin-bottom: 5px;">📍 Juan Delacruz (+63)0000000000</p>
+  <p style="font-size: 14px; margin-bottom: 15px;">Address</p>
+
+  ${cartItems.map(item => `
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+      <img src="${item.image}" alt="${item.name}" style="width: 50px; height: 50px; border-radius: 5px;" />
+      <div style="flex: 1;">
+        <div style="font-weight: bold;">${item.name}</div>
+        <div>
+          <label>Variant</label>
+          <select style="width: 100%; margin-bottom: 5px;">
+            <option selected>${item.shade}</option>
+          </select>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div>₱${item.price}</div>
+        <input type="number" value="${item.quantity}" min="1" style="width: 40px; text-align: center; margin-top: 5px;" />
+      </div>
+    </div>
+  `).join('')}
+
+  <div style="margin-bottom: 15px;">
+    <strong>Payment Method</strong><br />
+    <label><input type="radio" name="payment" /> <img src="https://png.pngtree.com/png-clipart/20210530/original/pngtree-cash-on-delivery-truck-icon-png-image_6344227.jpg" alt="Google Pay" style="width: 50px; vertical-align: middle;" /> COD</label><br />
+    <label><input type="radio" name="payment" /> <img src="https://getcash.ph/wp-content/uploads/2021/01/Transparent-1280-x-720.png" alt="Google Pay" style="width: 50px; vertical-align: middle;" /> GCASH</label><br />
+    <label><input type="radio" name="payment" /> <img src="https://www.mastercard.com/content/dam/public/mastercardcom/ph/en/logos/mastercard-og-image.png" alt="Apple Pay" style="width: 50px; vertical-align: middle;" /> Master Card</label>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <label>Discount Code:</label><br />
+    <input type="text" placeholder="Select or Enter Code" style="width: 100%; padding: 5px; border-radius: 4px; border: none;" />
+  </div>
+
+  <div style="font-size: 14px; margin-bottom: 15px;">Total (${cartItems.length} items): <strong>₱${total}</strong></div>
+
+<button onclick="placeOrder()" style="
+    width: 100%;
+    background-color: #4d2c16;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+">Place order</button>
+
+`;
+                    // Slide in
+                    checkoutSidebar.style.right = '0px';
+                    checkoutSidebar.style.display = 'block'; // Ensure it's visible
+                }
+
+                function placeOrder() {
+                    const cartItems = getCartItems(); // this should return an array of products in cart
+
+                    // ✅ Save to localStorage
+                    localStorage.setItem('lastOrder', JSON.stringify(cartItems));
+
+                    // Clear session cart if needed
+                    sessionStorage.removeItem('cart');
+
+                    // Show success & redirect
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Order Placed!',
+                        text: 'Thank you for your purchase.',
+                        timer: 1500,
+                        showConfirmButton: false
+                    }).then(() => {
+                        window.location.href = 'order_success.html';
+                    });
+                }
+
+
+
+                // Event listener for the "Check Out" button in cart
+                checkoutButton.addEventListener('click', () => {
+                    renderCheckout();
+                    checkoutSidebar.style.display = 'block';
+                });
+
+                // Function to close checkout sidebar
+                function closeCheckout() {
+                    checkoutSidebar.style.right = '-400px';
+                }
+
+                // Optional: click outside to close checkout
+                document.addEventListener('click', (e) => {
+                    if (!checkoutSidebar.contains(e.target) && !cartSidebar.contains(e.target) && !e.target.closest('.cart')) {
+                        closeCheckout();
+                    }
+                });
+            </script>
+<script>
+                const addToCartBtn = document.getElementById('addToCartBtn');
+                const cartSidebar = document.getElementById('cartSidebar');
+                const cartIcon = document.querySelector('.cart');
+
+                // Utils for session storage
+                function getCartItems() {
+                    return JSON.parse(sessionStorage.getItem('cart')) || [];
+                }
+
+                function setCartItems(items) {
+                    sessionStorage.setItem('cart', JSON.stringify(items));
+                }
+
+                // Render dynamic cart
+                function renderCart() {
+                    const cartItems = getCartItems();
+                    const container = document.getElementById('cartItemsContainer');
+                    container.innerHTML = '';
+
+                    cartItems.forEach((item, index) => {
+                        const itemDiv = document.createElement('div');
+                        itemDiv.style.display = 'flex';
+                        itemDiv.style.alignItems = 'center';
+                        itemDiv.style.marginBottom = '15px';
+                        itemDiv.innerHTML = `
+                                        <button onclick="removeCartItem(${index})" style="border: none; background: transparent; color: white; font-size: 18px; cursor: pointer;">✖</button>
+                                        <img src="${item.image}" alt="${item.name}" style="width: 40px; height: 40px; border-radius: 5px; margin: 0 10px;" />
+                                        <div style="flex-grow: 1;">
+                                            <div>${item.name}</div>
+                                            <small>Shade: ${item.shade}</small>
+                                        </div>
+                                        <div>
+                                            <span style="font-size: 12px;">₱${item.price}</span>
+                                            <div style="margin-top: 5px;">
+                                                <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${index}, this.value)" style="width: 40px; text-align: center;" />
+                                            </div>
+                                        </div>
+                                    `;
+                        container.appendChild(itemDiv);
+                    });
+
+                    // Update total
+                    const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                    const totalDisplay = cartSidebar.querySelector('p');
+                    totalDisplay.innerHTML = `Total (${cartItems.length} items): <strong>₱${total}</strong>`;
+                }
+
+                // Remove item
+                function removeCartItem(index) {
+                    const items = getCartItems();
+                    items.splice(index, 1);
+                    setCartItems(items);
+                    renderCart();
+                }
+
+                // Update quantity
+                function updateQuantity(index, value) {
+                    const items = getCartItems();
+                    items[index].quantity = parseInt(value);
+                    setCartItems(items);
+                    renderCart();
+                }
+
+                // Add to cart
+                addToCartBtn.addEventListener('click', () => {
+                    const product = {
+                        name: "Kind Words Matte Lipstick",
+                        price: 250,
+                        image: "https://image-optimizer-reg.production.sephora-asia.net/images/product_images/closeup_1_Product_840122905056-RARE-BEAUTY-Kind-Words-Matte-Lipstick-Worthy_fef0d1d0a13338973cb00176d5f88a1119c52c2f_1655140249.png",
+                        shade: document.querySelector('.product-area button.selected')?.textContent || "Default",
+                        quantity: parseInt(document.querySelector('.product-area input[type="number"]').value)
+                    };
+
+                    const cartItems = getCartItems();
+                    cartItems.push(product);
+                    setCartItems(cartItems);
+                    renderCart();
+
+                    // Show SweetAlert
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Added to Cart!',
+                        text: `${product.name} - ${product.shade}`,
+                        timer: 1500,
+                        showConfirmButton: false
+                    }).then(() => {
+                        // Open cart after alert
+                        cartSidebar.style.right = '0px';
+                    });
+                });
+
+                // Toggle cart on icon click
+                cartIcon.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    cartSidebar.style.right = cartSidebar.style.right === '0px' ? '-400px' : '0px';
+                });
+
+                // Shade selector (optional)
+                document.querySelectorAll('.product-area div[style*="grid-template-columns"] button').forEach(button => {
+                    button.addEventListener('click', () => {
+                        document.querySelectorAll('.product-area div[style*="grid-template-columns"] button').forEach(b => b.classList.remove('selected'));
+                        button.classList.add('selected');
+                    });
+                });
+
+                // Close cart when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!cartSidebar.contains(e.target) && !cartIcon.contains(e.target)) {
+                        cartSidebar.style.right = '-400px';
+                    }
+                });
+
+                // Initialize cart on load
+                window.onload = renderCart;
+
+                function openCheckout() {
+                    renderCheckout();
+                    checkoutSidebar.style.display = 'block';
+                    checkoutSidebar.style.right = '0px';
+                }
+
+                function closeCheckout() {
+                    checkoutSidebar.style.right = '-400px';
+                    setTimeout(() => {
+                        checkoutSidebar.style.display = 'none';
+                    }, 300);
+                }
+
+            </script>
+<script>
+                const favoriteBtn = document.getElementById('favoriteBtn');
+                const favoriteSidebar = document.getElementById('favoriteSidebar');
+                const heartIcon = document.getElementById('heartIcon');
+
+                function getFavoriteItems() {
+                    return JSON.parse(localStorage.getItem('favorites')) || [];
+                }
+
+                function setFavoriteItems(items) {
+                    localStorage.setItem('favorites', JSON.stringify(items));
+                }
+
+                function getCurrentItem() {
+                    return {
+                        name: favoriteBtn.getAttribute('data-name'),
+                        image: favoriteBtn.getAttribute('data-image'),
+                        shade: favoriteBtn.getAttribute('data-shade'),
+                        price: favoriteBtn.getAttribute('data-price')
+                    };
+                }
+
+                function isItemInFavorites(item) {
+                    return getFavoriteItems().some(fav =>
+                        fav.name === item.name &&
+                        fav.shade === item.shade
+                    );
+                }
+
+                function updateHeartIcon() {
+                    const item = getCurrentItem();
+                    heartIcon.textContent = isItemInFavorites(item) ? '♥' : '♡';
+                }
+
+                function renderFavorites() {
+                    const container = document.getElementById('favoriteItemsContainer');
+                    const favorites = getFavoriteItems();
+                    container.innerHTML = '';
+
+                    if (favorites.length === 0) {
+                        container.innerHTML = '<p style="color: white;">No favorite items.</p>';
+                    } else {
+                        favorites.forEach((item, index) => {
+                            const div = document.createElement('div');
+                            div.style.display = 'flex';
+                            div.style.alignItems = 'center';
+                            div.style.marginBottom = '15px';
+                            div.innerHTML = `
+                                            <button onclick="removeFavorite(${index})" style="border: none; background: transparent; color: white; font-size: 18px; cursor: pointer;">✖</button>
+                                            <img src="${item.image}" alt="${item.name}" style="width: 40px; height: 40px; border-radius: 5px; margin: 0 10px;" />
+                                            <div style="flex-grow: 1;">
+                                                <div>${item.name}</div>
+                                                <small>${item.price}</small>
+                                            </div>
+                                        `;
+                            container.appendChild(div);
+                        });
+                    }
+
+                    favoriteSidebar.style.display = 'block';
+                    favoriteSidebar.style.right = '0px';
+                }
+
+                function removeFavorite(index) {
+                    const favorites = getFavoriteItems();
+                    favorites.splice(index, 1);
+                    setFavoriteItems(favorites);
+                    renderFavorites();
+                    updateHeartIcon();
+                }
+
+                function toggleFavorite(item) {
+                    const favorites = getFavoriteItems();
+                    const index = favorites.findIndex(fav =>
+                        fav.name === item.name &&
+                        fav.shade === item.shade
+                    );
+
+                    if (index !== -1) {
+                        favorites.splice(index, 1);
+                    } else {
+                        favorites.push(item);
+                    }
+
+                    setFavoriteItems(favorites);
+                    renderFavorites();
+                    updateHeartIcon();
+                }
+
+                favoriteBtn.addEventListener('click', () => {
+                    const item = getCurrentItem();
+                    toggleFavorite(item);
+                });
+
+                // Optional: hide sidebar on outside click
+                document.addEventListener('click', (e) => {
+                    if (!favoriteSidebar.contains(e.target) && !e.target.closest('#favoriteBtn')) {
+                        favoriteSidebar.style.right = '-400px';
+                    }
+                });
+
+                // Load initial state
+                document.addEventListener('DOMContentLoaded', () => {
+                    updateHeartIcon();
+                });
+            </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- FOOTER -->
+<div class="rating-block" style="margin-top: 10px; font-size: 18px;">
+<span style="color: gold;">★ ★ ★ ★ ☆</span>
+<a href="#" id="toggle-reviews-link" style="margin-left: 8px; color: blue; text-decoration: underline;">100 Reviews</a>
+</div>
+<div class="review-box hidden" id="reviews" style="margin-top: 20px; padding: 20px; background-color: #f3ecdf; border-radius: 10px;">
+<h3>Customer Reviews</h3>
+<div id="review-list"></div>
+<hr/>
+<h4>Leave a Review</h4>
+<form id="review-form">
+<div class="stars">
+<input id="star5" name="rating" type="radio" value="5"/><label for="star5">★</label>
+<input id="star4" name="rating" type="radio" value="4"/><label for="star4">★</label>
+<input id="star3" name="rating" type="radio" value="3"/><label for="star3">★</label>
+<input id="star2" name="rating" type="radio" value="2"/><label for="star2">★</label>
+<input id="star1" name="rating" type="radio" value="1"/><label for="star1">★</label>
+</div>
+<textarea id="comment" placeholder="Write your review here..." required="" style="width: 100%; padding: 10px; border-radius: 5px; margin-bottom: 10px;"></textarea><br/>
+<button style="padding: 10px 20px; background-color: #7a4212; color: white; border: none; border-radius: 5px;" type="submit">Submit Review</button>
+</form>
+</div>
+<section style="background-color: #f6f0e7; padding: 50px 20px; border-top: 1px solid #ddd;">
+<h2 style="text-align: center; color: #7a4212;">You May Also Like</h2>
+<div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 30px;">
+<!-- Product 1 -->
+<a href="product.html?product=lipgloss" style="text-decoration: none; width: 200px;">
+<div style="background: #fff; padding: 15px; border-radius: 10px; text-align: center; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+<img alt="Glossy Lip Tint" src="https://cdn.shopify.com/s/files/1/0552/3754/8237/products/1500x1500-Juicy-Glam-Gloss-CandyRed-2_800x.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px;"/>
+<h3 style="font-size: 16px; color: #000; margin: 10px 0;">Glossy Lip Tint</h3>
+<p style="color: #4d2e17; font-weight: bold;">₱199</p>
+</div>
+</a>
+<!-- Product 2 -->
+<a href="product.html?product=foundation" style="text-decoration: none; width: 200px;">
+<div style="background: #fff; padding: 15px; border-radius: 10px; text-align: center; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+<img alt="Soft Matte Foundation" src="https://images.ulta.com/is/image/Ulta/2591237?$md$" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px;"/>
+<h3 style="font-size: 16px; color: #000; margin: 10px 0;">Soft Matte Foundation</h3>
+<p style="color: #4d2e17; font-weight: bold;">₱299</p>
+</div>
+</a>
+<!-- Product 3 -->
+<a href="product.html?product=blush" style="text-decoration: none; width: 200px;">
+<div style="background: #fff; padding: 15px; border-radius: 10px; text-align: center; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+<img alt="Liquid Blush" src="https://cdn.shopify.com/s/files/1/0150/6262/products/c2aab4d3b3e540bfad3e6c0b36b5fdc1.image.800x800_800x.jpg" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px;"/>
+<h3 style="font-size: 16px; color: #000; margin: 10px 0;">Liquid Blush</h3>
+<p style="color: #4d2e17; font-weight: bold;">₱179</p>
+</div>
+</a>
+</div>
+</section>
+<section style="background-color: #f0ece6; padding: 40px 20px; border-top: 1px solid #ddd;">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 20px; max-width: 1100px; margin: auto;">
+<div style="flex: 1 1 300px; text-align: left;">
+<h3 style="margin-bottom: 10px; color: #000;">CUSTOMERS SERVICE:</h3>
+<p><strong>EMAIL:</strong> <a href="mailto:CUSTOMERSERVICE@CODEANDGLOWSALON.COM" style="color: #000; text-decoration: none;">CUSTOMERSERVICE@CODEANDGLOWSALON.COM</a></p>
+<p><strong>PHONE:</strong> <a href="tel:1-800-123-4567" style="color: #000; text-decoration: none;">1-800-123-4567</a></p>
+<p><strong>Operating Hours:</strong><br/>Monday-Friday: 9 AM - 8 PM EST<br/>Saturday: 10 AM - 5 PM EST</p>
+</div>
+<div style="flex: 1 1 200px;">
+<ul style="list-style: none; padding: 0;">
+<li><a href="shipping.html" style="text-decoration: none; color: #000;">FAQs</a></li>
+<li><a href="privacy.html" style="text-decoration: none; color: #000;">Privacy Policy</a></li>
+<li><a href="terms.html" style="text-decoration: none; color: #000;">Terms</a></li>
+</ul>
+</div>
+<div style="flex: 1 1 200px; text-align: right;">
+<p>Connect With Us</p>
+<a href="https://facebook.com" style="margin-right: 10px;" target="_blank">
+<img alt="Facebook" src="https://cdn-icons-png.flaticon.com/512/733/733547.png" style="width: 30px;"/>
+</a>
+<a href="https://instagram.com" target="_blank">
+<img alt="Instagram" src="https://cdn-icons-png.flaticon.com/512/733/733558.png" style="width: 30px;"/>
+</a>
+<div style="margin-top: 20px;">
+<img alt="Code &amp; Glow Logo" src="https://i.pinimg.com/736x/b8/f7/a1/b8f7a136ed384bbbddb50986e194f940.jpg" style="width: 100px;"/>
+</div>
+</div>
+</div>
+</section>
+<script src="cart.js"></script>
+</main></div>
+<style>
+  .stars {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  .stars input[type="radio"] {
+    display: none;
+  }
+  .stars label {
+    font-size: 2em;
+    color: #ccc;
+    transition: color 0.2s;
+  }
+  .stars input:checked ~ label,
+  .stars label:hover,
+  .stars label:hover ~ label {
+    color: gold;
+  }
+  .review-box {
+    padding: 20px;
+    background-color: #f3ecdf;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+  #review-list p {
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  .hidden {
+    display: none;
+  }
+</style>
+<script>
+  const productId = "lipstick123";
+  const currentUser = localStorage.getItem('currentUser') || 'Guest';
+  let currentImageIndex = 0;
+  const images = [
+    "https://image-optimizer-reg.production.sephora-asia.net/images/product_images/closeup_1_Product_840122905056-RARE-BEAUTY-Kind-Words-Matte-Lipstick-Worthy_fef0d1d0a13338973cb00176d5f88a1119c52c2f_1655140249.png",
+    "https://www.sephora.com/productimages/sku/s2590057-main-zoom.jpg",
+    "https://www.sephora.com/productimages/sku/s2590065-main-zoom.jpg"
+  ];
+
+  function changeImage(index) {
+    currentImageIndex = index;
+    const mainImage = document.getElementById('mainImage');
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    
+    mainImage.src = images[index];
+    thumbnails.forEach((thumb, i) => {
+      if (i === index) {
+        thumb.style.border = '2px solid #7a4212';
+      } else {
+        thumb.style.border = '2px solid transparent';
+      }
+    });
+  }
+
+  document.getElementById('prevImage').addEventListener('click', () => {
+    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+    changeImage(currentImageIndex);
+  });
+
+  document.getElementById('nextImage').addEventListener('click', () => {
+    currentImageIndex = (currentImageIndex + 1) % images.length;
+    changeImage(currentImageIndex);
+  });
+
+  function loadReviews() {
+    const reviews = JSON.parse(localStorage.getItem(productId) || "[]");
+    const list = document.getElementById("review-list");
+    list.innerHTML = reviews.map(r =>
+      `<p><strong>${r.username}</strong>: ${"⭐".repeat(r.rating)}<br>${r.comment}</p>`
+    ).join("");
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Check if user is logged in
+    if (!localStorage.getItem('currentUser')) {
+      document.getElementById("review-form").innerHTML = `
+        <p style="color: #7a4212;">Please <a href="login.html" style="color: #7a4212; text-decoration: underline;">login</a> to leave a review.</p>
+      `;
+    }
+
+    loadReviews();
+
+    // Make both review links clickable
+    document.querySelectorAll('.review-link, #toggle-reviews-link').forEach(link => {
+      link.addEventListener("click", function(e) {
+        e.preventDefault();
+        document.getElementById("reviews").classList.remove("hidden");
+        document.getElementById("reviews").scrollIntoView({ behavior: 'smooth' });
+        if (localStorage.getItem('currentUser')) {
+          document.getElementById("comment").focus();
+        }
+      });
+    });
+
+    document.getElementById("review-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      
+      // Check if user is logged in
+      if (!localStorage.getItem('currentUser')) {
+        window.location.href = 'login.html';
+        return;
+      }
+
+      const ratingInput = document.querySelector('input[name="rating"]:checked');
+      const comment = document.getElementById("comment").value;
+
+      if (!ratingInput) {
+        alert("Please select a rating");
+        return;
+      }
+
+      const newReview = {
+        username: localStorage.getItem('currentUser'),
+        rating: +ratingInput.value,
+        comment
+      };
+
+      const reviews = JSON.parse(localStorage.getItem(productId) || "[]");
+      reviews.push(newReview);
+      localStorage.setItem(productId, JSON.stringify(reviews));
+      loadReviews();
+      this.reset();
+    });
+  });
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const toggleBtn = document.getElementById("toggle-details");
+    const detailsSection = document.getElementById("product-details");
+    
+    toggleBtn.addEventListener("click", function () {
+        if (detailsSection.style.display === "none") {
+            detailsSection.style.display = "block";
+            toggleBtn.style.marginBottom = "0"; // Reduce bottom margin when expanded
+        } else {
+            detailsSection.style.display = "none";
+            toggleBtn.style.marginBottom = "30px"; // Restore bottom margin when collapsed
+        }
+    });
+});
+</script>
+  <script>
+  const user = localStorage.getItem("currentUser");
+  if (user) {
+    const signInLink = document.querySelector('.sign-in');
+    if (signInLink) {
+      signInLink.innerHTML = `
+        <img src="https://icons.veryicon.com/png/o/education-technology/education-cloud/username-1.png" alt="User Icon" />
+        <span>${user}</span>
+      `;
+      signInLink.href = "profile.html"; 
+    }
+  }
+</script>
+<script>
+// Shade selection functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const shadeButtons = document.querySelectorAll('.shade-btn');
+    let selectedShade = null;
+
+    shadeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            shadeButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+            selectedShade = this.dataset.shade;
+        });
+    });
+
+    // Quantity control functionality
+    const quantityInput = document.getElementById('quantityInput');
+    const decreaseBtn = document.getElementById('decreaseQuantity');
+    const increaseBtn = document.getElementById('increaseQuantity');
+
+    function updateQuantity(value) {
+        const newValue = parseInt(value);
+        if (newValue >= 1 && newValue <= 10) {
+            quantityInput.value = newValue;
+        }
+        // Enable/disable decrease button based on quantity
+        decreaseBtn.disabled = newValue <= 1;
+    }
+
+    decreaseBtn.addEventListener('click', () => {
+        updateQuantity(parseInt(quantityInput.value) - 1);
+    });
+
+    increaseBtn.addEventListener('click', () => {
+        updateQuantity(parseInt(quantityInput.value) + 1);
+    });
+
+    quantityInput.addEventListener('change', (e) => {
+        let value = parseInt(e.target.value);
+        // Ensure value is within bounds
+        value = Math.max(1, Math.min(10, value));
+        updateQuantity(value);
+    });
+
+    // Initialize quantity state
+    updateQuantity(1);
+
+    // Update Add to Cart functionality to include shade and quantity
+    const addToCartBtn = document.getElementById('addToCartBtn');
+    addToCartBtn.addEventListener('click', () => {
+        if (!selectedShade) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Please Select a Shade',
+                text: 'You must select a shade before adding to cart.',
+                timer: 2000,
+                showConfirmButton: false
+            });
+            return;
+        }
+
+        const product = {
+            name: "Kind Words Matte Lipstick",
+            price: 250,
+            image: document.getElementById('mainImage').src,
+            shade: selectedShade,
+            quantity: parseInt(quantityInput.value)
+        };
+
+        const cartItems = getCartItems();
+        cartItems.push(product);
+        setCartItems(cartItems);
+        renderCart();
+
+        Swal.fire({
+            icon: 'success',
+            title: 'Added to Cart!',
+            text: `${product.name} - ${product.shade} (Qty: ${product.quantity})`,
+            timer: 1500,
+            showConfirmButton: false
+        }).then(() => {
+            cartSidebar.style.right = '0px';
+        });
+    });
+});
+</script>
+</body>
+</html>
